@@ -15,11 +15,23 @@
     <!-- Latest compiled JavaScript -->
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
+    <!-- Include PouchDB-->
+    <script src="//cdn.jsdelivr.net/pouchdb/3.5.0/pouchdb.min.js"></script>
+
     <script src="/script.js"></script>
     <script src="build/react.js"></script>
     <script src="build/JSXTransformer.js"></script>
     <script type="text/jsx">
     /** @jsx React.DOM */
+
+    var db = new PouchDB('jsonload'),
+    remote = 'https://e7a08a8a-a7a3-4bc0-94a5-ba012e29dbf2-bluemix: f6973f1c4ae49c4d69738219a883e9de82c07e7338ea7b8092ea6b814e6a5cc5@e7a08a8a-a7a3-4bc0-94a5-ba012e29dbf2-bluemix.cloudant.com/jsonload',
+    opts = {
+      continuous: true
+    };
+
+	db.replicate.to(remote, opts);
+	db.replicate.from(remote, opts);
 
 	var ProductLookup = React.createClass({
 	  incrementCount: function(){
@@ -34,16 +46,22 @@
 	  },
 
 	  findProduct: function(){
-	  	React.render(<ProductFind/>, document.body);
+	  	// alert('this is it: '+this.state.value)
+	  	React.render(<ProductFind docID={this.state.value}/>, document.body);
 	  },
 
+	  handleChange: function(event) {
+    	this.setState({value: event.target.value});
+  	  },
+
 	  render: function(){
+	  	var value = this.state.value;
 	    return (
 	      <div class="my-component" >
 	        <img src="images/Best_Buy_Logo.png" max-width="50%" max-height="50%"></img>
 	      	<h1>Reverse Logistics Application</h1>
 	      	<p>Please speak or enter the SKU to be returned: </p>
-	      	<input type="text" placeholder="SKU"></input><br /><br />
+	      	<input type="text" placeholder="SKU" value={value} onChange={this.handleChange}></input><br /><br />
 	      	<button type="submit" className="btn btn-success" onClick={this.findProduct}>Submit</button>
 	        <h1>Count: {this.state.count}</h1>
 	        <button type="button" onClick={this.incrementCount}>Increment</button>
@@ -53,13 +71,26 @@
 	});
 
 	var ProductFind = React.createClass({
+		
+		searchDB: function(){
+
+			this.setProps({
+				doc: 'hi there neighbor'
+			});
+
+		},
+
 		render: function(){
+			// alert('this is the this.props.docID '+{this.props.docID})
+			this.searchDB;
 			return (
 				<div class="my-component">
 					<p>HELLOOOOO WORLD!!!</p>
+					<p></p>
 				</div>
 			)
 		}
+
 	});
 
 	React.render(<ProductLookup/>, document.getElementById('mount-point'));
