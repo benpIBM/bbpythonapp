@@ -32,18 +32,34 @@
 	       count: 0
 	     }
 	  },
+
+	  findProduct: function(){
+	  	React.render(<ProductFind/>, document.body);
+	  },
+
 	  render: function(){
 	    return (
-	      <div class="my-component">
+	      <div class="my-component" >
+	        <img src="images/Best_Buy_Logo.png" max-width="50%" max-height="50%"></img>
 	      	<h1>Reverse Logistics Application</h1>
 	      	<p>Please speak or enter the SKU to be returned: </p>
-	      	<input type="text" placeholder="SKU"></input>
-	      	<button type="submit" className="btn btn-success">Submit</button>
+	      	<input type="text" placeholder="SKU"></input><br /><br />
+	      	<button type="submit" className="btn btn-success" onClick={this.findProduct}>Submit</button>
 	        <h1>Count: {this.state.count}</h1>
 	        <button type="button" onClick={this.incrementCount}>Increment</button>
 	      </div>
 	    );
 	  }
+	});
+
+	var ProductFind = React.createClass({
+		render: function(){
+			return (
+				<div class="my-component">
+					<p>HELLOOOOO WORLD!!!</p>
+				</div>
+			)
+		}
 	});
 
 	React.render(<ProductLookup/>, document.getElementById('mount-point'));
@@ -55,6 +71,12 @@
     
     <div id='mount-point' align="center">
     <p>hiworld</p>
+    <script type="text/jsx">
+      // React Code Goes Here
+    </script>
+    </div>
+    <div id='other-mount-point' align="center">
+    <p>otherworld</p>
     <script type="text/jsx">
       // React Code Goes Here
     </script>
