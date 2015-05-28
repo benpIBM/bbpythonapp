@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Reverse Logisitics Application</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+    <script src="/script.js"></script>
+    <script src="build/react.js"></script>
+    <script src="build/JSXTransformer.js"></script>
+    <script type="text/jsx">
+    /** @jsx React.DOM */
+
+	var Counter = React.createClass({
+	  incrementCount: function(){
+	    this.setState({
+	      count: this.state.count + 1
+	    });
+	  },
+	  getInitialState: function(){
+	     return {
+	       count: 0
+	     }
+	  },
+	  render: function(){
+	    return (
+	      <div class="my-component">
+	        <h1>Count: {this.state.count}</h1>
+	        <button type="button" onClick={this.incrementCount}>Increment</button>
+	      </div>
+	    );
+	  }
+	});
+
+	React.render(<Counter/>, document.getElementById('mount-point'));
+    </script>
+
+  </head>
+
+  <body>
+    
+    <div id='mount-point' align="center">
+    <p>hiworld</p>
+    <script type="text/jsx">
+      // React Code Goes Here
+    </script>
+    </div>
+
+  </body>
+
+</html>
