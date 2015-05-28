@@ -21,7 +21,7 @@
     <script type="text/jsx">
     /** @jsx React.DOM */
 
-	var Counter = React.createClass({
+	var ProductLookup = React.createClass({
 	  incrementCount: function(){
 	    this.setState({
 	      count: this.state.count + 1
@@ -35,6 +35,10 @@
 	  render: function(){
 	    return (
 	      <div class="my-component">
+	      	<h1>Reverse Logistics Application</h1>
+	      	<p>Please speak or enter the SKU to be returned: </p>
+	      	<input type="text" placeholder="SKU"></input>
+	      	<button type="submit" className="btn btn-success">Submit</button>
 	        <h1>Count: {this.state.count}</h1>
 	        <button type="button" onClick={this.incrementCount}>Increment</button>
 	      </div>
@@ -42,7 +46,7 @@
 	  }
 	});
 
-	React.render(<Counter/>, document.getElementById('mount-point'));
+	React.render(<ProductLookup/>, document.getElementById('mount-point'));
     </script>
 
   </head>
