@@ -63,21 +63,15 @@
 	  },
 
 	  dbGet: function(){
-			db.get('1039004').then(function (doc) {
+			db.get(this.state.value).then(function (doc) {
 	  			// handle doc
-	  			//alert('this is the doc: '+JSON.stringify(doc))
-	  			console.log(doc.leftViewImage)
 	  			JSONdoc = doc
 	  			React.render(<ProductFind doc={JSONdoc}/>, document.body); 
 			}).catch(function (err) {
+				React.render(<NoProductFind />, document.body);
 	  			console.log(err);
 			})
 		},
-
-	  findProduct: function(){
-	  	// alert('this is it: '+this.state.value)
-	  	this.dbGet()
-	  },
 
 	  handleChange: function(event) {
     	this.setState({value: event.target.value});
@@ -92,7 +86,7 @@
 	      	<h1>Reverse Logistics Application</h1>
 	      	<p>Please speak or enter the SKU to be returned: </p>
 	      	<input type="text" placeholder="SKU" value={value} onChange={this.handleChange}></input><br /><br />
-	      	<button type="submit" className="btn btn-success" onClick={this.findProduct}>Submit</button>
+	      	<button type="submit" className="btn btn-success" onClick={this.dbGet}>Submit</button>
 	      </div>
 	    );
 	  }
@@ -113,15 +107,28 @@
 		},
 
 		render: function(){
-			alert('this is the this.props.docID '+this.props.docID)
-			//this.props.doc = this.dbGet()
-			
-			alert('about to log')
-			// alert('this is it! '+this.props.doc)
 			return (
 				<div class="my-component" align="center">
 					<p>{this.props.doc.longDescriptionHtml}</p>
 					 <img src={this.props.doc.leftViewImage} alt="Smiley face"> </img>
+				</div>
+			)
+		}
+
+	});
+
+	var NoProductFind = React.createClass({
+
+		getInitialState: function(){
+	    	return {
+	    		doc: ''
+	     	}
+	  	},
+
+		render: function(){
+			return (
+				<div class="my-component" align="center">
+					<p>NO PRODUCT FOUND</p>
 				</div>
 			)
 		}
