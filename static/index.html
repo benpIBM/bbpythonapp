@@ -109,8 +109,10 @@
 		render: function(){
 			return (
 				<div class="my-component" align="center">
+					<h1>{this.props.doc.productTemplate} Checklist</h1>
+					<br /><img src={this.props.doc.image} alt="Smiley face"> </img><br />
+					<p> Please select all items that are in the box: </p>
 					<p>{this.props.doc.longDescriptionHtml}</p>
-					 <img src={this.props.doc.leftViewImage} alt="Smiley face"> </img>
 				</div>
 			)
 		}
@@ -148,13 +150,6 @@
       // React Code Goes Here
     </script>
     </div>
-    <div id='other-mount-point' align="center">
-    <p>otherworld</p>
-    <script type="text/jsx">
-      // React Code Goes Here
-    </script>
-    </div>
-
   </body>
 
 </html>
