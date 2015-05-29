@@ -62,9 +62,25 @@
 	     }
 	  },
 
+	  dbGet: function(){
+			db.get('1039004').then(function (doc) {
+	  			// handle doc
+	  			alert('this is the doc: '+JSON.stringify(doc))
+	  			console.log(doc.leftViewImage)
+	  			
+	  			this.setProps({
+	  				jdoc: JSON.stringify(doc.leftViewImage)
+	  			});
+	  			alert('this is the json+ '+ this.props.jdoc) 
+			}).catch(function (err) {
+	  			console.log(err);
+			})
+		},
+
 	  findProduct: function(){
 	  	// alert('this is it: '+this.state.value)
-	  	React.render(<ProductFind docID={this.state.value}/>, document.body);
+	  	this.dbGet()
+	  	React.render(<ProductFind docID={this.state.value} doc={this.props.jdoc}/>, document.body);
 	  },
 
 	  handleChange: function(event) {
@@ -73,6 +89,7 @@
 
 	  render: function(){
 	  	var value = this.state.value;
+	  	var jdoc = this.props.jdoc;
 	    return (
 	      <div class="my-component" >
 	        <img src="images/Best_Buy_Logo.png" max-width="50%" max-height="50%"></img>
@@ -101,24 +118,10 @@
 
 		},
 
-		dbGet: function(){
-			db.get('1039004').then(function (doc) {
-	  			// handle doc
-	  			alert('this is the doc: '+JSON.stringify(doc))
-	  			console.log(doc.leftViewImage)
-	  			alert('this is the json+ '+JSON.stringify(doc.leftViewImage))
-	  			this.props.doc = JSON.stringify(doc.leftViewImage)
-			}).catch(function (err) {
-	  			console.log(err);
-			})
-		},
-
-	
-
 		render: function(){
 			alert('this is the this.props.docID '+this.props.docID)
 			//this.props.doc = this.dbGet()
-			this.dbGet()
+			
 			alert('about to log')
 			console.log('this is it! '+this.props.doc)
 			return (
