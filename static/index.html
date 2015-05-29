@@ -66,9 +66,9 @@
 			db.get(this.state.value).then(function (doc) {
 	  			// handle doc
 	  			JSONdoc = doc
-	  			React.render(<ProductFind doc={JSONdoc}/>, document.body); 
+	  			React.render(<ProductFind doc={JSONdoc}/>, document.getElementById('mount-point')); 
 			}).catch(function (err) {
-				React.render(<NoProductFind />, document.body);
+				React.render(<NoProductFind />, document.getElementById('mount-point'));
 	  			console.log(err);
 			})
 		},
