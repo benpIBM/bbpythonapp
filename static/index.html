@@ -19,7 +19,6 @@
     <!-- Include PouchDB-->
     <script src="//cdn.jsdelivr.net/pouchdb/3.5.0/pouchdb.min.js"></script>
 
-    <script src="/script.js"></script>
     <script src="build/react.js"></script>
     <script src="build/JSXTransformer.js"></script>
     <script type="text/jsx">
@@ -34,6 +33,7 @@
 	db.replicate.from(remote, opts);
 
 	var leftViewImage = '';
+	var JSONdoc ='';
 
 	
 
@@ -65,13 +65,9 @@
 	  dbGet: function(){
 			db.get('1039004').then(function (doc) {
 	  			// handle doc
-	  			alert('this is the doc: '+JSON.stringify(doc))
+	  			//alert('this is the doc: '+JSON.stringify(doc))
 	  			console.log(doc.leftViewImage)
-	  			
-	  			this.setProps({
-	  				jdoc: JSON.stringify(doc.leftViewImage)
-	  			});
-	  			alert('this is the json+ '+ this.props.jdoc) 
+	  			JSONdoc = doc 
 			}).catch(function (err) {
 	  			console.log(err);
 			})
@@ -79,8 +75,8 @@
 
 	  findProduct: function(){
 	  	// alert('this is it: '+this.state.value)
-	  	this.dbGet()
-	  	React.render(<ProductFind docID={this.state.value} doc={this.props.jdoc}/>, document.body);
+	  	
+	  	React.render(<ProductFind docID={this.state.value} doc={JSONdoc}/>, document.body);
 	  },
 
 	  handleChange: function(event) {
@@ -89,7 +85,7 @@
 
 	  render: function(){
 	  	var value = this.state.value;
-	  	var jdoc = this.props.jdoc;
+	  	this.dbGet()
 	    return (
 	      <div class="my-component" >
 	        <img src="images/Best_Buy_Logo.png" max-width="50%" max-height="50%"></img>
@@ -97,8 +93,6 @@
 	      	<p>Please speak or enter the SKU to be returned: </p>
 	      	<input type="text" placeholder="SKU" value={value} onChange={this.handleChange}></input><br /><br />
 	      	<button type="submit" className="btn btn-success" onClick={this.findProduct}>Submit</button>
-	        <h1>Count: {this.state.count}</h1>
-	        <button type="button" onClick={this.incrementCount}>Increment</button>
 	      </div>
 	    );
 	  }
@@ -123,11 +117,11 @@
 			//this.props.doc = this.dbGet()
 			
 			alert('about to log')
-			console.log('this is it! '+this.props.doc)
+			// alert('this is it! '+this.props.doc)
 			return (
-				<div class="my-component">
-					<p>HELLOOOOO WORLD!!!</p>
-					 <img src={this.props.doc} alt="Smiley face" height="42" width="42"> </img>
+				<div class="my-component" align="center">
+					<p>{this.props.doc.longDescriptionHtml}</p>
+					 <img src={this.props.doc.leftViewImage} alt="Smiley face"> </img>
 				</div>
 			)
 		}
