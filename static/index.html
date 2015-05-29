@@ -46,7 +46,7 @@
 	  },
 
 	  findProduct: function(){
-	  	// alert('this is it: '+this.state.value)
+	  	alert('this is it: '+this.state.value)
 	  	React.render(<ProductFind docID={this.state.value}/>, document.body);
 	  },
 
@@ -71,6 +71,12 @@
 	});
 
 	var ProductFind = React.createClass({
+
+		getInitialState: function(){
+	    	return {
+	    		docID: ''
+	     	}
+	  	},
 		
 		searchDB: function(){
 
@@ -81,7 +87,7 @@
 		},
 
 		render: function(){
-			// alert('this is the this.props.docID '+{this.props.docID})
+			alert('this is the this.props.docID '+this.props.docID)
 			this.searchDB;
 			return (
 				<div class="my-component">
