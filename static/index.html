@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
@@ -24,14 +25,30 @@
     <script type="text/jsx">
     /** @jsx React.DOM */
 
-    var db = new PouchDB('jsonload'),
-    remote = 'https://e7a08a8a-a7a3-4bc0-94a5-ba012e29dbf2-bluemix: f6973f1c4ae49c4d69738219a883e9de82c07e7338ea7b8092ea6b814e6a5cc5@e7a08a8a-a7a3-4bc0-94a5-ba012e29dbf2-bluemix.cloudant.com/jsonload',
+    var db = new PouchDB('bbload'),
+    remote = 'https://bsp:demoPass@bsp.cloudant.com/bbload',
     opts = {
       continuous: true
     };
-
 	db.replicate.to(remote, opts);
 	db.replicate.from(remote, opts);
+
+	var leftViewImage = '';
+
+	
+
+	// db.get('1039004').then(function (doc) {
+	//   // handle doc
+	//   alert('this is the doc: '+JSON.stringify(doc));
+	//   console.log(doc.leftViewImage);
+	//   leftViewImage = doc.leftViewImage;
+	// }).catch(function (err) {
+	//   console.log(err);
+	// });
+
+
+
+
 
 	var ProductLookup = React.createClass({
 	  incrementCount: function(){
@@ -46,7 +63,7 @@
 	  },
 
 	  findProduct: function(){
-	  	alert('this is it: '+this.state.value)
+	  	// alert('this is it: '+this.state.value)
 	  	React.render(<ProductFind docID={this.state.value}/>, document.body);
 	  },
 
@@ -74,25 +91,40 @@
 
 		getInitialState: function(){
 	    	return {
-	    		docID: ''
+	    		docID: '',
+	    		doc: ''
 	     	}
 	  	},
 		
 		searchDB: function(){
-
-			this.setProps({
-				doc: 'hi there neighbor'
-			});
+			alert('inside search function')
 
 		},
 
+		dbGet: function(){
+			db.get('1039004').then(function (doc) {
+	  			// handle doc
+	  			alert('this is the doc: '+JSON.stringify(doc))
+	  			console.log(doc.leftViewImage)
+	  			alert('this is the json+ '+JSON.stringify(doc.leftViewImage))
+	  			this.props.doc = JSON.stringify(doc.leftViewImage)
+			}).catch(function (err) {
+	  			console.log(err);
+			})
+		},
+
+	
+
 		render: function(){
 			alert('this is the this.props.docID '+this.props.docID)
-			this.searchDB;
+			//this.props.doc = this.dbGet()
+			this.dbGet()
+			alert('about to log')
+			console.log('this is it! '+this.props.doc)
 			return (
 				<div class="my-component">
 					<p>HELLOOOOO WORLD!!!</p>
-					<p></p>
+					 <img src={this.props.doc} alt="Smiley face" height="42" width="42"> </img>
 				</div>
 			)
 		}
