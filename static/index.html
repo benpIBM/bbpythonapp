@@ -67,7 +67,8 @@
 	  			// handle doc
 	  			//alert('this is the doc: '+JSON.stringify(doc))
 	  			console.log(doc.leftViewImage)
-	  			JSONdoc = doc 
+	  			JSONdoc = doc
+	  			React.render(<ProductFind doc={JSONdoc}/>, document.body); 
 			}).catch(function (err) {
 	  			console.log(err);
 			})
@@ -75,8 +76,7 @@
 
 	  findProduct: function(){
 	  	// alert('this is it: '+this.state.value)
-	  	
-	  	React.render(<ProductFind docID={this.state.value} doc={JSONdoc}/>, document.body);
+	  	this.dbGet()
 	  },
 
 	  handleChange: function(event) {
@@ -85,7 +85,7 @@
 
 	  render: function(){
 	  	var value = this.state.value;
-	  	this.dbGet()
+
 	    return (
 	      <div class="my-component" >
 	        <img src="images/Best_Buy_Logo.png" max-width="50%" max-height="50%"></img>
