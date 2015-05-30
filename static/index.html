@@ -110,13 +110,14 @@
 			return (
 				<div className="my-component" align="center">
 					<h1>{this.props.doc.productTemplate} Checklist</h1>
+					<h4>{this.props.doc._id}</h4>
 					<br /><img src={this.props.doc.image} alt="Smiley face"> </img><br /><br />
 					<p>Description of this product: <br />
 					{this.props.doc.shortDescription}</p><br />
 					<a href="#" className="btn btn-primary" data-toggle="modal" data-target="#basicModal">Whats in the box?</a><br/><br />
 					<div>{this.buildModal()}</div>
 					<p> Please select all items that are in the box: </p>
-					
+					<div dangerouslySetInnerHTML={{__html: this.buildIncludedItemList()}}></div>
 				</div>
 			);
 		},
@@ -146,6 +147,16 @@
 			    	</div>
 			    <div>HELLOBUILDCHECKLIST</div>
 			    </div>
+				);
+		},
+
+		buildIncludedItemList: function() {
+			var list = ''
+			for (var i = 0; i<this.props.doc.includedItemList.length; i++){
+				list += '<label><input type="checkbox"> '+this.props.doc.includedItemList[i]['includedItem']+'</label><br />'
+			}
+			return (
+				list
 				);
 		}
 
