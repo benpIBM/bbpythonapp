@@ -86,7 +86,7 @@
 	      	<h1>Reverse Logistics Application</h1>
 	      	<p>Please speak or enter the SKU to be returned: </p>
 	      	<input type="text" placeholder="SKU" value={value} onChange={this.handleChange}></input><br /><br />
-	      	<button type="submit" className="btn btn-success" onClick={this.dbGet}>Submit</button>
+	      	<button type="submit" className="btn btn-success" onClick={this.dbGet}>Search</button>
 	      </div>
 	    );
 	  }
@@ -116,8 +116,8 @@
 					{this.props.doc.shortDescription}</p><br />
 					<a href="#" className="btn btn-primary" data-toggle="modal" data-target="#basicModal">Whats in the box?</a><br/><br />
 					<div>{this.buildModal()}</div>
-					<p> Please select all items that are in the box: </p>
-					<div dangerouslySetInnerHTML={{__html: this.buildIncludedItemList()}}></div>
+
+
 				</div>
 			);
 		},
@@ -135,6 +135,8 @@
 			            		<h3>{this.props.doc.name}</h3>
 					              <p> {this.props.doc.longDescription} </p>
 					              <p><img src={this.props.doc.largeImage}></img></p> <br />
+					              <p> Please select all items that are in the box: </p>
+					              <div dangerouslySetInnerHTML={{__html: this.buildIncludedItemList()}}></div>
 					              GENERIC VIDEO
 					              <div>
 					              <iframe width="560" height="315" src="https://www.youtube.com/embed/SXqSg2A5b7I" frameborder="0" allowfullscreen></iframe>
@@ -142,6 +144,7 @@
 			            	</div>
 			            	<div className="modal-footer">
 			              		<button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+			              		<button type="button" className="btn btn-primary" data-dismiss="modal" onClick={this.goHome}>Submit</button>
 			            	</div>
 			        	</div>
 			    	</div>
@@ -158,6 +161,10 @@
 			return (
 				list
 				);
+		},
+
+		goHome: function() {
+			React.render(<ProductLookup/>, document.getElementById('mount-point'))
 		}
 
 	});
