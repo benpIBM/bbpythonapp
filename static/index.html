@@ -81,7 +81,7 @@
 	  	var value = this.state.value;
 
 	    return (
-	      <div class="my-component" >
+	      <div className="my-component" >
 	        <img src="images/Best_Buy_Logo.png" max-width="50%" max-height="50%"></img>
 	      	<h1>Reverse Logistics Application</h1>
 	      	<p>Please speak or enter the SKU to be returned: </p>
@@ -108,13 +108,45 @@
 
 		render: function(){
 			return (
-				<div class="my-component" align="center">
+				<div className="my-component" align="center">
 					<h1>{this.props.doc.productTemplate} Checklist</h1>
-					<br /><img src={this.props.doc.image} alt="Smiley face"> </img><br />
+					<br /><img src={this.props.doc.image} alt="Smiley face"> </img><br /><br />
+					<p>Description of this product: <br />
+					{this.props.doc.shortDescription}</p><br />
+					<a href="#" className="btn btn-primary" data-toggle="modal" data-target="#basicModal">Whats in the box?</a><br/><br />
+					<div>{this.buildModal()}</div>
 					<p> Please select all items that are in the box: </p>
-					<p>{this.props.doc.longDescriptionHtml}</p>
+					
 				</div>
-			)
+			);
+		},
+
+		buildModal: function() {
+			return (
+				<div className="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+			        <div className="modal-dialog">
+			          	<div className="modal-content">
+			            	<div className="modal-header">
+			              		<button type="button" className="close" data-dismiss="modal" aria-hidden="true">&amp;{this.props.doc.productId} </button>
+			              		<h4 className="modal-title" id="myModalLabel">Whats in the box?</h4>
+			            	</div>
+			            	<div className="modal-body">
+			            		<h3>{this.props.doc.name}</h3>
+					              <p> {this.props.doc.longDescription} </p>
+					              <p><img src={this.props.doc.largeImage}></img></p> <br />
+					              GENERIC VIDEO
+					              <div>
+					              <iframe width="560" height="315" src="https://www.youtube.com/embed/SXqSg2A5b7I" frameborder="0" allowfullscreen></iframe>
+					              </div>
+			            	</div>
+			            	<div className="modal-footer">
+			              		<button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+			            	</div>
+			        	</div>
+			    	</div>
+			    <div>HELLOBUILDCHECKLIST</div>
+			    </div>
+				);
 		}
 
 	});
@@ -129,7 +161,7 @@
 
 		render: function(){
 			return (
-				<div class="my-component" align="center">
+				<div className="my-component" align="center">
 					<p>NO PRODUCT FOUND</p>
 				</div>
 			)
